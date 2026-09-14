@@ -1,0 +1,198 @@
+/* ==========================================================================
+   ELEMENT 118 — PERIODIC TABLE GRID & ELEMENT CARD STYLES
+   ========================================================================== */
+
+.periodic-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding: 1rem 0.5rem 2rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.legend-item:hover, .legend-item.active {
+  color: var(--text-primary);
+  border-color: var(--border-bright);
+  transform: translateY(-1px);
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+}
+
+/* Category Accent Classes */
+.cat-alkali-metal { --card-accent: var(--cat-alkali-metal); --card-glow: var(--cat-alkali-metal-glow); }
+.cat-alkaline-earth { --card-accent: var(--cat-alkaline-earth); --card-glow: var(--cat-alkaline-earth-glow); }
+.cat-transition-metal { --card-accent: var(--cat-transition-metal); --card-glow: var(--cat-transition-metal-glow); }
+.cat-post-transition { --card-accent: var(--cat-post-transition); --card-glow: var(--cat-post-transition-glow); }
+.cat-metalloid { --card-accent: var(--cat-metalloid); --card-glow: var(--cat-metalloid-glow); }
+.cat-reactive-nonmetal { --card-accent: var(--cat-reactive-nonmetal); --card-glow: var(--cat-reactive-nonmetal-glow); }
+.cat-noble-gas { --card-accent: var(--cat-noble-gas); --card-glow: var(--cat-noble-gas-glow); }
+.cat-lanthanide { --card-accent: var(--cat-lanthanide); --card-glow: var(--cat-lanthanide-glow); }
+.cat-actinide { --card-accent: var(--cat-actinide); --card-glow: var(--cat-actinide-glow); }
+.cat-unknown { --card-accent: var(--cat-unknown); --card-glow: var(--cat-unknown-glow); }
+
+.periodic-grid {
+  display: grid;
+  grid-template-columns: repeat(18, minmax(64px, 1fr));
+  grid-template-rows: repeat(10, minmax(78px, auto));
+  gap: 6px;
+  min-width: 1180px;
+  position: relative;
+}
+
+/* Periodic Element Card */
+.element-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--card-accent, #64748b);
+  border-radius: var(--radius-md);
+  padding: 0.35rem 0.45rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), opacity var(--transition-normal);
+  backdrop-filter: blur(8px);
+}
+
+.element-card:hover {
+  transform: translateY(-4px) scale(1.05);
+  z-index: 20;
+  border-color: var(--card-accent, #38bdf8);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 16px var(--card-glow, rgba(56, 189, 248, 0.3));
+  background: var(--bg-card-hover);
+}
+
+.element-card:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+  z-index: 21;
+}
+
+.element-card.dimmed {
+  opacity: 0.18;
+  filter: grayscale(0.85);
+  pointer-events: none;
+}
+
+.element-card.highlighted {
+  border-color: #38bdf8;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
+  animation: pulseHighlight 1.5s infinite alternate;
+  z-index: 15;
+}
+
+@keyframes pulseHighlight {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.8);
+  }
+}
+
+/* Element Card Content Structure */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+}
+
+.card-num {
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.card-mass-small {
+  font-size: 0.55rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-symbol {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-align: center;
+  margin: 0.1rem 0;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.card-name {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Special Series Spacer Placeholders */
+.series-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  border: 1px dashed var(--border-medium);
+  border-radius: var(--radius-md);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  padding: 0.25rem;
+  text-align: center;
+}
+
+.series-placeholder.lanthanide {
+  border-color: var(--cat-lanthanide);
+  color: var(--cat-lanthanide);
+}
+
+.series-placeholder.actinide {
+  border-color: var(--cat-actinide);
+  color: var(--cat-actinide);
+}
+
+/* Grid Separator Rows */
+.grid-row-gap {
+  grid-column: 1 / -1;
+  height: 16px;
+}
+
+/* Periodic Table Trend Heatmap Overlay Colors */
+.heatmap-mode .element-card {
+  border-left-width: 1px;
+}
